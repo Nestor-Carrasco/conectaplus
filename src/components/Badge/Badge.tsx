@@ -15,7 +15,7 @@ const variantStyles: Record<BadgeVariant, string> = {
   primary: 'bg-blue-600 text-white',
   secondary: 'bg-gray-600 text-white',
   danger: 'bg-red-600 text-white',
-  success: 'bg-green-600 text-white',
+  success: 'bg-green-700 text-white',
 };
 
 const sizeStyles: Record<BadgeSize, string> = {

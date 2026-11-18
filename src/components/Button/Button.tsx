@@ -35,7 +35,7 @@ export function Button({
         // Estas clases son compartidas; `variantStyles` agrega el color y `className`
         // permite que quien usa el componente añada estilos puntuales.
         'inline-flex items-center justify-center rounded-md px-4 py-2 font-medium transition-colors',
-        'focus-visible:outline-2 focus-visible:outline-offset-2',
+        'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700',
         'disabled:cursor-not-allowed disabled:opacity-50',
         variantStyles[variant],
         className

@@ -53,4 +53,14 @@ describe('Button', () => {
     expect(screen.getByRole('button', { name: 'No disponible' })).toBeDisabled();
     expect(screen.getByRole('button', { name: 'No disponible' })).toHaveClass('w-full');
   });
+
+  it('shows a visible focus outline with a contrasting color', () => {
+    render(<Button>Foco</Button>);
+
+    expect(screen.getByRole('button', { name: 'Foco' })).toHaveClass(
+      'focus-visible:outline-2',
+      'focus-visible:outline-offset-2',
+      'focus-visible:outline-blue-700'
+    );
+  });
 });

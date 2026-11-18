@@ -1,4 +1,4 @@
-import { describe, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { Badge } from './Badge.tsx';
 
@@ -20,7 +20,7 @@ describe('Badge', () => {
 
   it('aplica variante success', () => {
     render(<Badge variant="success">Éxito</Badge>);
-    expect(screen.getByText('Éxito')).toHaveClass('bg-green-600 text-white');
+    expect(screen.getByText('Éxito')).toHaveClass('bg-green-700 text-white');
   });
 
   it('aplica variante secondary', () => {
