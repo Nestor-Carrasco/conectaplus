@@ -4,7 +4,7 @@ on:
   push:
     branches: [main, dev]
   pull_request:
-    branches: [main]
+    branches: [main, dev]
 
 jobs:
   lint-and-test:
@@ -18,6 +18,18 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: '24', cache: 'pnpm', cache-dependency-path: 'pnpm-lock.yaml' }
       - run: pnpm install --frozen-lockfile
+      - name: Audit producción (gate)
+        run: pnpm audit --prod
+      # Alerta visible en todos los PRs y pushes: lista cada advisory high/critical
+      # (incluidos los ignorados en el gate). Nunca bloquea.
+      - name: Audit completo (informativo)
+        run: pnpm audit --audit-level=high
+        continue-on-error: true
+      # Gate obligatorio: cualquier advisory high/critical rompe el build,
+      # salvo excepciones documentadas y vigentes (ver AGENTS.md).
+      # Excepción vigente: picomatch GHSA-fc5q-39xc-vjpf (sin parche).
+      - name: Audit high+critical (gate)
+        run: pnpm audit --audit-level=high --ignore GHSA-fc5q-39xc-vjpf
       - run: pnpm run lint
       - run: pnpm run test
       - run: pnpm run build

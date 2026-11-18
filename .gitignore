@@ -14,7 +14,10 @@ coverage
 *.local
 
 fases
-AGENTS.md
+docs/*
+
+# Registros locales de auditoría
+audit.json
 
 # Editor directories and files
 .vscode/*
