@@ -30,5 +30,37 @@ export default defineConfig([
       },
     },
   },
+  {
+    files: ['**/*.{ts,tsx}'],
+    rules: {
+      complexity: ['error', { max: 10 }],
+      'max-depth': ['error', 3],
+      'max-lines': ['warn', { max: 300, skipBlankLines: true, skipComments: true }],
+      'max-lines-per-function': ['warn', { max: 80, skipBlankLines: true, skipComments: true }],
+    },
+  },
+  {
+    // Lógica de dominio: cálculos, utilidades, reducers y validaciones.
+    files: ['src/lib/**/*.{ts,tsx}', 'src/utils/**/*.{ts,tsx}', 'src/features/*/lib/**/*.{ts,tsx}'],
+    rules: {
+      complexity: ['error', { max: 5 }],
+      'max-lines-per-function': ['warn', { max: 50, skipBlankLines: true, skipComments: true }],
+    },
+  },
+  {
+    // Tests, datos estáticos, tipos y configuración quedan fuera de los límites de tamaño.
+    files: [
+      '**/*.test.{ts,tsx}',
+      '**/*.d.ts',
+      'src/data/**/*.{ts,tsx}',
+      'src/test/**/*.{ts,tsx}',
+      '**/*.config.{js,ts}',
+    ],
+    rules: {
+      complexity: 'off',
+      'max-lines': 'off',
+      'max-lines-per-function': 'off',
+    },
+  },
   prettierRecommended,
 ]);
