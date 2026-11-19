@@ -52,17 +52,17 @@ El desarrollo es incremental por niveles. Un nivel se considera terminado solo c
 
 ### Roadmap por niveles
 
-| Nivel | Alcance | Entregables y conceptos |
-|---|---|---|
-| 0. Base | Proyecto y red de seguridad | Vite + React + TypeScript estricto, Tailwind, ESLint, Prettier, pnpm y CI con lint y tests; Vitest, React Testing Library, jest-dom y user-event; componente `Badge` con TDD. |
-| 1. Catálogo estático | Lista de planes con datos locales | `Card`, `CardHeader`, `PlanCard` y `Button` con variantes tipadas; composición, listas con `key`, HTML semántico y consultas por rol. |
-| 2. Filtros y simulador | Búsqueda y cálculo de precios | Formularios controlados, `useState`, `useReducer`, `useMemo` y `useCallback`; función pura de cálculo con casos borde; tests de interacción. |
-| 3. Hooks y contexto | Estado compartido y utilidades | `useLocalStorage`, `useDebounce`, contexto de comparación, tema claro/oscuro, `useRef` para foco y `useEffect` para el título; tests con `renderHook` y providers. |
-| 4. API REST | Datos remotos y estados de red | MSW o json-server, búsqueda, paginación y favoritos; TanStack Query, caché, `staleTime`, invalidación y mutaciones optimistas; tests de éxito, error 500, respuesta lenta y lista vacía. |
-| 5. Navegación y rendimiento | Rutas y optimización | React Router, filtros en la URL, `React.lazy`, `Suspense`, code splitting, `React.memo` y optimización de imágenes; medición con React Profiler y Lighthouse. |
-| 6. Sitio público | Contenido estático e islas | Astro con islas React, artículos estáticos, buscador, comparador y simulador como islas; SSG/SSR, SEO técnico, sitemap, Open Graph, Pagefind/Algolia/OpenSearch, Core Web Vitals, Playwright y despliegue en S3 + CloudFront. |
-| 7. Accesibilidad | Interacción sin barreras | Modal accesible con foco atrapado y Escape, combobox con teclado y formulario multipaso con errores anunciados; WCAG, ARIA, axe y revisión manual solo con teclado. |
-| 8. Backend y auth | API y panel privado | Lambda + API Gateway + DynamoDB, Terraform, CloudWatch, Cognito con grupos cliente/admin, rutas protegidas y CRUD de planes/artículos; tests con `aws-sdk-client-mock`, DynamoDB Local, claims simulados y Playwright; CI/CD y Docker multi-stage. |
+| Nivel                       | Alcance                           | Entregables y conceptos                                                                                                                                                                                                                            |
+| --------------------------- | --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 0. Base                     | Proyecto y red de seguridad       | Vite + React + TypeScript estricto, Tailwind, ESLint, Prettier, pnpm y CI con lint y tests; Vitest, React Testing Library, jest-dom y user-event; componente `Badge` con TDD.                                                                      |
+| 1. Catálogo estático        | Lista de planes con datos locales | `Card`, `CardHeader`, `PlanCard` y `Button` con variantes tipadas; composición, listas con `key`, HTML semántico y consultas por rol.                                                                                                              |
+| 2. Filtros y simulador      | Búsqueda y cálculo de precios     | Formularios controlados, `useState`, `useReducer`, `useMemo` y `useCallback`; función pura de cálculo con casos borde; tests de interacción.                                                                                                       |
+| 3. Hooks y contexto         | Estado compartido y utilidades    | `useLocalStorage`, `useDebounce`, contexto de comparación, tema claro/oscuro, `useRef` para foco y `useEffect` para el título; tests con `renderHook` y providers.                                                                                 |
+| 4. API REST                 | Datos remotos y estados de red    | MSW o json-server, búsqueda, paginación y favoritos; TanStack Query, caché, `staleTime`, invalidación y mutaciones optimistas; tests de éxito, error 500, respuesta lenta y lista vacía.                                                           |
+| 5. Navegación y rendimiento | Rutas y optimización              | React Router, filtros en la URL, `React.lazy`, `Suspense`, code splitting, `React.memo` y optimización de imágenes; medición con React Profiler y Lighthouse.                                                                                      |
+| 6. Sitio público            | Contenido estático e islas        | Astro con islas React, artículos estáticos, buscador, comparador y simulador como islas; SSG/SSR, SEO técnico, sitemap, Open Graph, Pagefind/Algolia/OpenSearch, Core Web Vitals, Playwright y despliegue en S3 + CloudFront.                      |
+| 7. Accesibilidad            | Interacción sin barreras          | Modal accesible con foco atrapado y Escape, combobox con teclado y formulario multipaso con errores anunciados; WCAG, ARIA, axe y revisión manual solo con teclado.                                                                                |
+| 8. Backend y auth           | API y panel privado               | Lambda + API Gateway + DynamoDB, Terraform, CloudWatch, Cognito con grupos cliente/admin, rutas protegidas y CRUD de planes/artículos; tests con `aws-sdk-client-mock`, DynamoDB Local, claims simulados y Playwright; CI/CD y Docker multi-stage. |
 
 ## 6. Stack tecnológico
 
