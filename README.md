@@ -2,7 +2,9 @@
 
 [English](README.md) · [Español](README.es.md)
 
-**ConectaPlus** is a portfolio project: a web portal for a telecommunications company where customers can browse mobile plans, compare offers and simulate costs. It is built to demonstrate modern frontend engineering practices — strict TypeScript, accessible components, test-driven development and automated quality gates in CI.
+**ConectaPlus** is a portfolio project: a web portal for a telecommunications company, currently under construction. The goal is to let customers browse mobile plans, compare offers and simulate costs. It is built to demonstrate modern frontend engineering practices — strict TypeScript, accessible components, test-driven development and automated quality gates in CI.
+
+> **Project status:** base under construction (tooling, CI, documentation and the first reusable components). Features are being added incrementally.
 
 ## Tech Stack
 
@@ -58,7 +60,7 @@ Every push and pull request to `main` and `dev` runs the CI pipeline, which enfo
 
 ```text
 src/
-  components/    Reusable UI components (Badge, Button, Card, PlanCard)
+  components/    Reusable UI components (Badge, Button ready; Card, PlanCard in progress)
   features/      Feature modules (plans catalog)
   data/          Static plan data
   test/          Test setup and environment types
