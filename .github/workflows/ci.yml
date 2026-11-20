@@ -20,16 +20,10 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - name: Audit producción (gate)
         run: pnpm audit --prod
-      # Alerta visible en todos los PRs y pushes: lista cada advisory high/critical
-      # (incluidos los ignorados en el gate). Nunca bloquea.
-      - name: Audit completo (informativo)
-        run: pnpm audit --audit-level=high
-        continue-on-error: true
-      # Gate obligatorio: cualquier advisory high/critical rompe el build,
-      # salvo excepciones documentadas y vigentes (ver AGENTS.md).
-      # Excepción vigente: picomatch GHSA-fc5q-39xc-vjpf (sin parche).
+      # Gate obligatorio: cualquier advisory high/critical rompe el build.
+      # Sin excepciones vigentes (ver AGENTS.md).
       - name: Audit high+critical (gate)
-        run: pnpm audit --audit-level=high --ignore GHSA-fc5q-39xc-vjpf
+        run: pnpm audit --audit-level=high
       - run: pnpm run lint
       - run: pnpm run test
       - run: pnpm run build
