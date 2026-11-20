@@ -163,7 +163,7 @@ El desarrollo es incremental por niveles. Un nivel se considera terminado solo c
 - Antes de cada PR, el audit completo debe estar verde. El CI lo ejecuta como gate con `--audit-level=high` en pushes y PRs hacia `main` y `dev`, junto con `pnpm audit --prod`.
 - Si un advisory tiene parche disponible, actualizar la dependencia en el propio PR antes de fusionar; no se ignora.
 - Si no existe parche, se requiere una excepción explícita y documentada, aprobada por el usuario: identificador GHSA, motivo y fecha de caducidad. Se implementa como `--ignore <GHSA>` en el comando del CI y en local. Mientras exista, el CI mantiene visible la alerta (paso informativo que no bloquea). Al salir el parche, se revierte la excepción y se actualiza la dependencia.
-- Excepción vigente: `GHSA-fc5q-39xc-vjpf` (picomatch, ReDoS). Solo afecta a herramientas de desarrollo (Vite, Vitest, TypeScript-ESLint), con globs estáticos; sin parche a 2026-11-18. Revisar periódicamente con `pnpm view picomatch version`; cuando devuelva 4.0.8 o superior, ejecutar `pnpm update picomatch` y eliminar la excepción.
+- Al 2026-11-20 no hay excepciones vigentes.
 - En desarrollo: ejecutar `pnpm audit` completo cuando cambien `package.json` o `pnpm-lock.yaml`, al cerrar un nivel o PR y al menos una vez por semana. Un hallazgo en dependencias de producción detiene el trabajo y se pregunta al usuario; un hallazgo solo de desarrollo sin parche se documenta, sin bloquear.
 - Nunca ejecutar `pnpm audit --fix`, `pnpm update` ni overrides sin autorización explícita.
 
