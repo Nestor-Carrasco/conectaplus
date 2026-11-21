@@ -1,12 +1,12 @@
-import '@testing-library/jest-dom/vitest';
 import { render, screen } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import userEvent from '@testing-library/user-event';
+import { describe, expect, it, vi } from 'vitest';
 import { Button } from './Button.tsx';
 
 // Agrupamos los casos del mismo componente para que el reporte de Vitest
 // muestre con claridad qué comportamiento está comprobando cada prueba.
 describe('Button', () => {
-  it('renders its content as an accessible button', () => {
+  it('renderiza su contenido como un botón accesible', () => {
     render(<Button>Elegir plan</Button>);
 
     // Consultar por rol y nombre verifica cómo encontraría el botón una persona
@@ -14,7 +14,7 @@ describe('Button', () => {
     expect(screen.getByRole('button', { name: 'Elegir plan' })).toBeInTheDocument();
   });
 
-  it('uses the primary variant by default', () => {
+  it('usa la variante primary por defecto', () => {
     render(<Button>Elegir plan</Button>);
 
     expect(screen.getByRole('button', { name: 'Elegir plan' })).toHaveClass(
@@ -29,19 +29,27 @@ describe('Button', () => {
     ['primary', 'bg-blue-600', 'text-white'],
     ['secondary', 'bg-gray-600', 'text-white'],
     ['danger', 'bg-red-600', 'text-white'],
-  ] as const)('applies the %s variant classes', (variant, backgroundClass, textClass) => {
+  ] as const)('aplica la variante %s', (variant, backgroundClass, textClass) => {
     render(<Button variant={variant}>Acción</Button>);
 
     expect(screen.getByRole('button', { name: 'Acción' })).toHaveClass(backgroundClass, textClass);
   });
 
-  it('uses type="button" by default', () => {
+  it('usa type="button" por defecto', () => {
     render(<Button>Elegir plan</Button>);
 
     expect(screen.getByRole('button', { name: 'Elegir plan' })).toHaveAttribute('type', 'button');
   });
 
-  it('forwards native button props and a custom class', () => {
+  it('respeta type="submit" cuando se indica', () => {
+    render(<Button type="submit">Enviar</Button>);
+
+    // El default protege a los formularios de un envío accidental; este caso
+    // comprueba que la salida explícita sigue disponible.
+    expect(screen.getByRole('button', { name: 'Enviar' })).toHaveAttribute('type', 'submit');
+  });
+
+  it('reenvía props nativas y una clase personalizada', () => {
     render(
       <Button disabled className="w-full">
         No disponible
@@ -54,7 +62,47 @@ describe('Button', () => {
     expect(screen.getByRole('button', { name: 'No disponible' })).toHaveClass('w-full');
   });
 
-  it('shows a visible focus outline with a contrasting color', () => {
+  it('ejecuta onClick al hacer clic', async () => {
+    const user = userEvent.setup();
+    const onClick = vi.fn();
+    render(<Button onClick={onClick}>Elegir plan</Button>);
+
+    await user.click(screen.getByRole('button', { name: 'Elegir plan' }));
+
+    // El botón existe para accionar algo: este test protege el reenvío del evento.
+    expect(onClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('no ejecuta onClick si está deshabilitado', async () => {
+    const user = userEvent.setup();
+    const onClick = vi.fn();
+    render(
+      <Button disabled onClick={onClick}>
+        No disponible
+      </Button>
+    );
+
+    await user.click(screen.getByRole('button', { name: 'No disponible' }));
+
+    expect(onClick).not.toHaveBeenCalled();
+  });
+
+  it('se activa con Enter desde el teclado', async () => {
+    const user = userEvent.setup();
+    const onClick = vi.fn();
+    render(<Button onClick={onClick}>Elegir plan</Button>);
+
+    await user.tab();
+    expect(screen.getByRole('button', { name: 'Elegir plan' })).toHaveFocus();
+
+    await user.keyboard('{Enter}');
+
+    // Si el elemento dejara de ser un <button>, el rol podría seguir pasando;
+    // la activación por teclado detecta esa regresión de semántica nativa.
+    expect(onClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('muestra un contorno de foco visible', () => {
     render(<Button>Foco</Button>);
 
     expect(screen.getByRole('button', { name: 'Foco' })).toHaveClass(
