@@ -107,6 +107,14 @@ El desarrollo es incremental por niveles. Un nivel se considera terminado solo c
 - Probar casos borde: descuentos, redondeo, valores inválidos, estados de carga/error/vacío, 500 y respuestas lentas.
 - Cada nivel debe quedar con lint, typecheck, tests y build en verde.
 
+#### Tests congelados
+
+- Los tests aprobados son el contrato de la tarea. Durante la fase verde, el agente no puede crear, modificar ni borrar tests.
+- Si un test parece incorrecto, el agente debe detenerse, explicar por qué y proponer el cambio; no puede aplicarlo por su cuenta.
+- Está prohibido dejar la suite verde mediante `skip`, `only`, borrado de asserts, cambios de expectativas, mocks de la unidad bajo prueba o valores hardcodeados para el caso del test.
+- En fase roja sí se pueden añadir tests nuevos, uno por comportamiento, con revisión humana antes de implementar.
+- Un test solo se modifica cuando cambia el requisito, no cuando la implementación no logra pasarlo.
+
 ### Frontend
 
 - Componentes reutilizables, props tipadas, composición con `children` y `key` estables.
